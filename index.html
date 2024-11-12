@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>destinations wanderlux</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinations - WanderLux</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --primary-color: #c9a55c;
+            --secondary-color: #1e3a5f;
+            --text-color: #333;
+            --bg-color: #f9f9f9;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .dark-mode {
+            --primary-color: #d4af37;
+            --secondary-color: #34495e;
+            --text-color: #f0f0f0;
+            --bg-color: #2c3e50;
+        }
+
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        #darkModeToggle {
+            cursor: pointer;
+        }
+
+        .destination-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-btn {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .destination-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .bg-luxury {
+            background-image: url('https://picsum.photos/1920/1080?random=11');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .swiper-container {
+            width: 100%;
+            height: 400px;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .country-name {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <nav class="fixed w-full z-10 bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-primary-color">WanderLux</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="index.html" class="nav-link text-gray-700 hover:text-primary-color px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                       
+                        
+                        <a href="#" class="nav-link text-gray-700 hover:text-primary-color px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-200 focus:outline-none">
+                        <i class="fas fa-moon text-gray-600"></i>
+                    </button>
+                    <a href="#" class="ml-4 btn-primary px-4 py-2 rounded-md text-sm font-medium">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-16">
+        <section class="py-24 bg-luxury text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-5xl font-bold text-center mb-8">Luxurious Destinations</h1>
+                <p class="text-xl text-center mb-12">Discover opulent escapes and unforgettable experiences around the world.</p>
+            </div>
+        </section>
+
+        <section class="py-16 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-bold text-center mb-12">Our Countries</h2>
+                <div class="swiper-container mb-16">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=20" alt="France">
+                            <div class="country-name">France</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=21" alt="Italy">
+                            <div class="country-name">Italy</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=22" alt="Japan">
+                            <div class="country-name">Japan</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=23" alt="Greece">
+                            <div class="country-name">Greece</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=24" alt="Thailand">
+                            <div class="country-name">Thailand</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=25" alt="Spain">
+                            <div class="country-name">Spain</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=26" alt="Australia">
+                            <div class="country-name">Australia</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=27" alt="Brazil">
+                            <div class="country-name">Brazil</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=28" alt="Canada">
+                            <div class="country-name">Canada</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=29" alt="Egypt">
+                            <div class="country-name">Egypt</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=30" alt="India">
+                            <div class="country-name">India</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=31" alt="Morocco">
+                            <div class="country-name">Morocco</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=32" alt="New Zealand">
+                            <div class="country-name">New Zealand</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=33" alt="Peru">
+                            <div class="country-name">Peru</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=34" alt="South Africa">
+                            <div class="country-name">South Africa</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=35" alt="Switzerland">
+                            <div class="country-name">Switzerland</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=36" alt="Turkey">
+                            <div class="country-name">Turkey</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=37" alt="United Arab Emirates">
+                            <div class="country-name">United Arab Emirates</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=38" alt="United Kingdom">
+                            <div class="country-name">United Kingdom</div>
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="https://picsum.photos/800/600?random=39" alt="United States">
+                            <div class="country-name">United States</div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+
+                <div class="flex justify-center space-x-4 mb-12">
+                    <button class="filter-btn px-4 py-2 rounded-full border border-gray-300 hover:bg-primary-color hover:text-white active" data-filter="all">All</button>
+                    <button class="filter-btn px-4 py-2 rounded-full border border-gray-300 hover:bg-primary-color hover:text-white" data-filter="beach">Beach</button>
+                    <button class="filter-btn px-4 py-2 rounded-full border border-gray-300 hover:bg-primary-color hover:text-white" data-filter="city">City</button>
+                    <button class="filter-btn px-4 py-2 rounded-full border border-gray-300 hover:bg-primary-color hover:text-white" data-filter="mountain">Mountain</button>
+                    <button class="filter-btn px-4 py-2 rounded-full border border-gray-300 hover:bg-primary-color hover:text-white" data-filter="cultural">Cultural</button>
+                </div>
+
+                <div class="destination-gallery">
+                    <div class="destination-card bg-white rounded-lg shadow-md overflow-hidden" data-category="beach">
+                        <img src="https://picsum.photos/800/600?random=1" alt="Maldives" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Maldives</h3>
+                            <p class="text-gray-600 mb-4">Experience paradise on Earth with crystal clear waters and overwater bungalows.</p>
+                            <a href="#" class="btn-primary inline-block px-4 py-2 rounded-md">Explore</a>
+                        </div>
+                    </div>
+                    <div class="destination-card bg-white rounded-lg shadow-md overflow-hidden" data-category="city">
+                        <img src="https://picsum.photos/800/600?random=2" alt="Paris" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Paris</h3>
+                            <p class="text-gray-600 mb-4">Discover the City of Light with its iconic landmarks and world-class cuisine.</p>
+                            <a href="#" class="btn-primary inline-block px-4 py-2 rounded-md">Explore</a>
+                        </div>
+                    </div>
+                    <div class="destination-card bg-white rounded-lg shadow-md overflow-hidden" data-category="mountain">
+                        <img src="https://picsum.photos/800/600?random=3" alt="Swiss Alps" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Swiss Alps</h3>
+                            <p class="text-gray-600 mb-4">Indulge in breathtaking mountain views and luxurious ski resorts.</p>
+                            <a href="#" class="btn-primary inline-block px-4 py-2 rounded-md">Explore</a>
+                        </div>
+                    </div>
+                    <div class="destination-card bg-white rounded-lg shadow-md overflow-hidden" data-category="cultural">
+                        <img src="https://picsum.photos/800/600?random=4" alt="Kyoto" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Kyoto</h3>
+                            <p class="text-gray-600 mb-4">Immerse yourself in Japanese culture with ancient temples and traditional gardens.</p>
+                            <a href="#" class="btn-primary inline-block px-4 py-2 rounded-md">Explore</a>
+                        </div>
+                    </div>
+                    <div class="destination-card bg-white rounded-lg shadow-md overflow-hidden" data-category="beach">
+                        <img src="https://picsum.photos/800/600?random=5" alt="Bora Bora" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Bora Bora</h3>
+                            <p class="text-gray-600 mb-4">Escape to a tropical paradise with stunning lagoons and luxurious resorts.</p>
+                            <a href="#" class="btn-primary inline-block px-4 py-2 rounded-md">Explore</a>
+                        </div>
+                    </div>
+                    <div class="destination-card bg-white rounded-lg shadow-md overflow-hidden" data-category="city">
+                        <img src="https://picsum.photos/800/600?random=6" alt="New York City" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">New York City</h3>
+                            <p class="text-gray-600 mb-4">Experience the energy of the Big Apple with world-class entertainment and dining.</p>
+                            <a href="#" class="btn-primary inline-block px-4 py-2 rounded-md">Explore</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-secondary-color text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">WanderLux</h3>
+                    <p class="mb-4">Luxury travel experiences tailored to your desires.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-primary-color"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white hover:text-primary-color"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white hover:text-primary-color"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white hover:text-primary-color"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-primary-color">About Us</a></li>
+                        <li><a href="#" class="hover:text-primary-color">Destinations</a></li>
+                        <li><a href="#" class="hover:text-primary-color">Experiences</a></li>
+                        <li><a href="#" class="hover:text-primary-color">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-4">Newsletter</h4>
+                    <p class="mb-4">Subscribe to our newsletter for exclusive travel tips and offers.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="flex-grow px-4 py-2 rounded-l-md focus:outline-none focus:ring-2 focus:ring-primary-color">
+                        <button type="submit" class="bg-primary-color text-white px-4 py-2 rounded-r-md hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-primary-color">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center">
+                <p>&copy; 2023 WanderLux. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        const icon = darkModeToggle.querySelector('i');
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+        });
+
+        // Filter buttons
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const destinationCards = document.querySelectorAll('.destination-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.dataset.filter;
+                
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                destinationCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation to destination cards
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        destinationCards.forEach(card => {
+            observer.observe(card);
+        });
+
+        // Initialize Swiper
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 40,
+                },
+            }
+        });
+    </script>
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
